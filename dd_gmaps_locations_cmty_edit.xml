@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension type="extension" version="3.8" method="upgrade">
+    <name>com_dd_gmaps_locations_cmty_edit</name>
+    <version>1.0.0.0</version>
+    <creationDate>31.10.2017</creationDate>
+    <author>HR IT-Solutions Florian Häusler</author>
+    <authorEmail>info@hr-it-solutions.com</authorEmail>
+    <authorUrl>https://www.hr-it-solutions.com</authorUrl>
+    <copyright>Copyright (C) 2017 - 2017 Didldu e.K. | HR IT-Solutions</copyright>
+    <license>GNU/GPLv2 only</license>
+    <description>COM_DD_GMAPS_LOCATIONS_CMTY_EDIT_XML_DESCRIPTION</description>
+
+    <!-- Scripts to run on installation -->
+    <scriptfile></scriptfile>
+
+    <!-- Runs on install -->
+    <install>
+    </install>
+
+    <!-- Run on uninstall-->
+    <uninstall>
+    </uninstall>
+
+    <!-- Runs on update -->
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+    </update>
+
+    <files folder="site">
+        <filename>controller.php</filename>
+        <filename>dd_gmaps_locations_cmty_edit.php</filename>
+        <folder>helpers</folder>
+        <folder>language</folder>
+        <folder>models</folder>
+        <folder>views</folder>
+    </files>
+    <languages folder="site">
+        <language tag="en-GB">language/en-GB/en-GB.com_dd_gmaps_locations_cmty_edit.ini</language>
+        <language tag="de-DE">language/de-DE/de-DE.com_dd_gmaps_locations_cmty_edit.ini</language>
+    </languages>
+
+    <administration>
+        <files folder="admin">
+            <filename>index.html</filename>
+        </files>
+        <languages folder="admin">
+            <language tag="en-GB">language/en-GB/en-GB.com_dd_gmaps_locations_cmty_edit.sys.ini</language>
+            <language tag="de-DE">language/de-DE/de-DE.com_dd_gmaps_locations_cmty_edit.sys.ini</language>
+        </languages>
+    </administration>
+
+    <media destination="com_dd_gmaps_locations_cmty_edit" folder="media">
+        <folder>css</folder>
+        <folder>img</folder>
+        <folder>js</folder>
+    </media>
+
+    <!-- Update servers -->
+    <updateservers>
+        <server type="collection" priority="1" name="HR IT-Solutions Updates">http://www.hr-it-solutions.com/jextensions/update.xml</server>
+    </updateservers>
+</extension>
