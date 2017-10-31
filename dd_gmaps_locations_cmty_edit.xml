@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<extension type="extension" version="3.8" method="upgrade">
+<extension type="component" version="3.8" method="upgrade">
     <name>com_dd_gmaps_locations_cmty_edit</name>
     <version>1.0.0.0</version>
     <creationDate>31.10.2017</creationDate>
