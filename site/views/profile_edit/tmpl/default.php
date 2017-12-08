@@ -18,7 +18,7 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
 
 ?>
 <div id="dd_gmaps_locations_cmty_edit-location" class="row-fluid dd_gmaps_locations_cmty_edit">
-	<form action="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations_cmty_edit&id=' . (int) $this->item->id); ?>"
+	<form action="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations_cmty_edit&view=profile_edit&id=' . (int) $this->item->id); ?>"
 	      method="post" name="adminForm" id="adminForm" class="form-validate">
 		<div class="row-fluid">
 			<div class="span12">
@@ -282,9 +282,9 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
 
 				<?php // Other fields support, like custom fields (excluded from load 'general', 'address', 'images', 'location-details', 'location-thirparyconnect', 'publishing') ?>
 				<?php $this->ignore_fieldsets = array('general', 'address', 'images', 'location-details', 'location-thirparyconnect', 'publishing'); ?>
-				<?php echo JLayoutHelper::render('joomla.edit.params', $this); ?>
+				<?php echo JLayoutHelper::render('profile_edit.params', $this, $basePath = JPATH_COMPONENT . '/layouts/'); ?>
 
-				<?php if($this->params->get('ext_c_connect')): ?>
+				<?php if(JComponentHelper::getParams('com_dd_gmaps_locations')->get('ext_c_connect')): ?>
 					<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'location-thirparyconnect', JText::_('COM_DD_GMAPS_LOCATIONS_LOCATION_THIRDPARTYCONNECT')); ?>
 					<div class="row-fluid form-horizontal-desktop">
 						<div class="span6">
@@ -326,18 +326,18 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
 						</div>
 						<div class="control-group">
 							<div class="control-label">
-								<?php echo $this->form->getLabel('published_up'); ?>
+								<?php echo $this->form->getLabel('publish_up'); ?>
 							</div>
 							<div class="controls">
-								<?php echo $this->form->getInput('published_up'); ?>
+								<?php echo $this->form->getInput('publish_up'); ?>
 							</div>
 						</div>
 						<div class="control-group">
 							<div class="control-label">
-								<?php echo $this->form->getLabel('published_down'); ?>
+								<?php echo $this->form->getLabel('publish_down'); ?>
 							</div>
 							<div class="controls">
-								<?php echo $this->form->getInput('published_down'); ?>
+								<?php echo $this->form->getInput('publish_down'); ?>
 							</div>
 						</div>
 						<div class="control-group">
@@ -375,5 +375,17 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
 				<?php echo JHtml::_('form.token'); ?>
 			</div>
 		</div>
+        <div class="btn-toolbar">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary" onclick="Joomla.submitbutton('profile_edit.save')">
+                    <span class="icon-ok"></span><?php echo JText::_('JSAVE') ?>
+                </button>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn" onclick="Joomla.submitbutton('profile_edit.cancel')">
+                    <span class="icon-cancel"></span><?php echo JText::_('JCANCEL') ?>
+                </button>
+            </div>
+        </div>
 	</form>
 </div>

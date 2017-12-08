@@ -21,7 +21,7 @@ class DD_GMaps_Locations_CMTY_EditModelLocations extends JModelItem
 	 *
 	 * @return  string
 	 *
-	 * @since   Version 1.1.0.1
+	 * @since   Version 1.0.0.0
 	 */
 	public function getItems()
 	{

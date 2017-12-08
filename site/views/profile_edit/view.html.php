@@ -7,7 +7,6 @@
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
  **/
 
-
 defined('_JEXEC') or die;
 
 /**
@@ -17,6 +16,12 @@ defined('_JEXEC') or die;
  */
 class DD_GMaps_Locations_CMTY_EditViewProfile_Edit extends JViewLegacy
 {
+	protected $form;
+
+	protected $item;
+
+	protected $state;
+
 	/**
 	 * Execute and display a template script.
 	 *
@@ -28,12 +33,72 @@ class DD_GMaps_Locations_CMTY_EditViewProfile_Edit extends JViewLegacy
 	 */
 	public function display($tpl = null)
 	{
-		$app    = JFactory::getApplication();
-		$params = $app->getParams();
+		$user = JFactory::getUser();
+		$app  = JFactory::getApplication();
 
-		// Escape strings for HTML output
-		$this->pageclass_sfx = htmlspecialchars($params->get('pageclass_sfx'));
+		// Get model data.
+		$this->state       = $this->get('State');
+		$this->item        = $this->get('Item');
+		$this->form        = $this->get('Form');
+
+		/* todo: implement check via controller, insted of the checks below this comment!
+		$this->input = $app->input;
+		$view        = $this->input->get('view', 'profile_edit');
+		$layout      = $this->input->get('layout', 'default');
+		$id          = $this->input->getInt('id');
+
+		// Check for edit form
+
+		if ($view == 'profile_edit' && $layout == 'default' && !$this->checkEditId('com_dd_gmaps_locations.edit.location', $id))
+		{
+			$app->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
+			$app->setHeader('status', 403, true);
+
+			return false;
+		}
+		*/
+
+		if (empty($this->item->id))
+		{
+			$authorised = $user->authorise('core.create', 'com_dd_gmaps_locations')
+				|| count($user->getAuthorisedCategories('com_dd_gmaps_locations', 'core.create'));
+		}
+		else
+		{
+			$authorised = $user->authorise('core.edit', 'com_dd_gmaps_locations') || ($user->authorise('core.edit.own', 'com_dd_gmaps_locations') && $this->item->created_by === $user->id);
+		}
+
+		if ($authorised !== true)
+		{
+			$app->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
+			$app->setHeader('status', 403, true);
+
+			return false;
+		}
+
+		// Check for errors.
+		if (count($errors = $this->get('Errors')))
+		{
+			JError::raiseWarning(500, implode("\n", $errors));
+
+			return false;
+		}
+
+		JFactory::getLanguage()->load('com_dd_gmaps_locations', JPATH_ADMINISTRATOR, 'en-GB', true);
+		JFactory::getLanguage()->load('com_dd_gmaps_locations', JPATH_ADMINISTRATOR, JFactory::getLanguage()->getTag(), true);
+
+		$this->_prepareDocument();
 
 		parent::display($tpl);
+	}
+
+	/**
+	 * Prepares the document
+	 *
+	 * @return  void.
+	 */
+	protected function _prepareDocument()
+	{
+		// todo:
 	}
 }
