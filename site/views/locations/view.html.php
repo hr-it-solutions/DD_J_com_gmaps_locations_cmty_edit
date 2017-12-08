@@ -26,7 +26,7 @@ class DD_Gmaps_Locations_CMTY_EditViewLocations extends JViewLegacy
 	 *
 	 * @throws  Exception
 	 */
-	function display($tpl = null)
+	public function display($tpl = null)
 	{
 		$this->app = JFactory::getApplication();
 
