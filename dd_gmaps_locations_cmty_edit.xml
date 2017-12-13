@@ -31,6 +31,7 @@
     <files folder="site">
         <filename>controller.php</filename>
         <filename>dd_gmaps_locations_cmty_edit.php</filename>
+        <folder>controller</folder>
         <folder>helpers</folder>
         <folder>language</folder>
         <folder>models</folder>
