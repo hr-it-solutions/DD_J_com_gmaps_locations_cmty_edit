@@ -1,6 +1,6 @@
 <?php
 /**
- * @package    DD_
+ * @package    DD_GMaps_Locations_CMTY_Edit
  *
  * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
  * @copyright  Copyright (C) 2017 - 2017 Didldu e.K. | HR IT-Solutions
@@ -30,8 +30,31 @@ class DD_GMaps_Locations_CMTY_EditControllerProfile_Edit extends JControllerForm
 		if (!parent::add())
 		{
 			// Redirect to the return page.
-			$this->setRedirect(JUri::current(), 'Profile Saved', 'note');
+			$this->setRedirect($this->getReturnPage());
 		}
+	}
+
+	/**
+	 * Method to edit an existing record.
+	 *
+	 * @param   string  $key     The name of the primary key of the URL variable.
+	 * @param   string  $urlVar  The name of the URL variable if different from the primary key
+	 * (sometimes required to avoid router collisions).
+	 *
+	 * @return  boolean  True if access level check and checkout passes, false otherwise.
+	 *
+	 * @since   1.6
+	 */
+	public function edit($key = null, $urlVar = 'id')
+	{
+		$result = parent::edit($key, $urlVar);
+
+		if (!$result)
+		{
+			$this->setRedirect(JRoute::_($this->getReturnPage()));
+		}
+
+		return $result;
 	}
 
 	/**
