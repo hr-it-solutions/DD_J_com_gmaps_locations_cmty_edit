@@ -19,14 +19,6 @@ use Joomla\Utilities\ArrayHelper;
 class DD_GMaps_Locations_CMTY_EditControllerProfile_Edit extends JControllerForm
 {
 	/**
-	 * The URL edit variable.
-	 *
-	 * @var    string
-	 * @since  3.2
-	 */
-	protected $urlVar = 'a.id';
-
-	/**
 	 * Method to add a new record.
 	 *
 	 * @return  mixed  True if the record can be added, an error object if not.
@@ -168,7 +160,7 @@ class DD_GMaps_Locations_CMTY_EditControllerProfile_Edit extends JControllerForm
 	 *
 	 * @since   1.6
 	 */
-	public function save($key = null, $urlVar = 'a_id')
+	public function save($key = null, $urlVar = null)
 	{
 		$result    = parent::save($key, $urlVar);
 		$app       = JFactory::getApplication();
