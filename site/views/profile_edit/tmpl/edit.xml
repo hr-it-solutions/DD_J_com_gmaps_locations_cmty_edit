@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="Profile" option="com_dd_gmaps_locations_cmty_edit_profile_edit_view_edit_options">
+        <message>
+            <![CDATA[com_dd_gmaps_locations_cmty_edit_profile_edit_desc]]>
+        </message>
+    </layout>
+
+    <fieldset name="basic" label="COM_DD_GMAPS_LOCATIONS_CMTY_EDIT_LABEL_BASIC">
+
+        <field
+                name="custom_field_edit"
+                type="list"
+                class="btn-group btn-group-yesno"
+                default="1"
+                label="COM_DD_GMAPS_LOCATIONS_CMTY_EDIT_CUSTOM_FIELD_EDIT_LABEL"
+                description="COM_DD_GMAPS_LOCATIONS_CMTY_EDIT_CUSTOM_FIELD_EDIT_DESC" >
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+    </fieldset>
+
+</metadata>
