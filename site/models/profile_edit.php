@@ -277,7 +277,11 @@ class DD_GMaps_Locations_CMTY_EditModelProfile_Edit extends JModelAdmin
 				if (!JFactory::getUser()->authorise('core.admin'))
 				{
 					$categories = JFactory::getUser()->getAuthorisedCategories('com_dd_gmaps_locations', 'core.edit');
-					$data->set('catid', $categories[0]);
+
+					if (isset($categories[0]))
+					{
+						$data->set('catid', $categories[0]);
+					}
 				}
 			}
 		}
