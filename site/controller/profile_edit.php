@@ -27,7 +27,42 @@ class DD_GMaps_Locations_CMTY_EditControllerProfile_Edit extends JControllerForm
 	 */
 	public function add()
 	{
-		if (!parent::add())
+
+		$this->option = 'com_dd_gmaps_locations';
+		$this->context = 'profile_edit';
+
+		$context = "$this->option.edit.$this->context";
+
+		// Access check.
+		if (!$this->allowAdd())
+		{
+			// Set the internal error and also the redirect error.
+			$this->setError(JText::_('JLIB_APPLICATION_ERROR_CREATE_RECORD_NOT_PERMITTED'));
+			$this->setMessage($this->getError(), 'error');
+
+			$this->setRedirect(
+				JRoute::_(
+					'index.php?option=' . $this->option . '&view=' . $this->view_list
+					. $this->getRedirectToListAppend(), false
+				)
+			);
+
+			$return = false;
+		}
+
+		// Clear the record edit information from the session.
+		JFactory::getApplication()->setUserState($context . '.data', null);
+
+		// Redirect to the edit screen.
+		$this->setRedirect(
+			JRoute::_(
+				'index.php?option=com_dd_gmaps_locations_cmty_edit&view=profile_edit&layout=edit&id=0', false
+			)
+		);
+
+		$return = true;
+
+		if (!$return)
 		{
 			// Redirect to the return page.
 			$this->setRedirect($this->getReturnPage());
@@ -68,22 +103,27 @@ class DD_GMaps_Locations_CMTY_EditControllerProfile_Edit extends JControllerForm
 	 */
 	protected function allowAdd($data = array())
 	{
-		$categoryId = ArrayHelper::getValue($data, 'catid', $this->input->getInt('filter_category_id'), 'int');
-		$allow = null;
+		$user       = JFactory::getUser();
+		$categoryId = ArrayHelper::getValue($data, 'catid', $this->input->getInt('catid'), 'int');
+		$allow      = null;
 
 		if ($categoryId)
 		{
 			// If the category has been passed in the data or URL check it.
-			$allow = JFactory::getUser()->authorise('core.create', 'com_dd_gmaps_locations.category.' . $categoryId);
+			$allow = $user->authorise('core.create', 'com_dd_gmaps_locations.category.' . $categoryId);
 		}
 
 		if ($allow === null)
 		{
-			// In the absense of better information, revert to the component permissions.
-			return parent::allowAdd();
-		}
+			$this->option = 'com_dd_gmaps_locations';
 
-		return $allow;
+			// In the absense of better information, revert to the component permissions.
+			return $user->authorise('core.create', $this->option) || count($user->getAuthorisedCategories($this->option, 'core.create'));
+		}
+		else
+		{
+			return $allow;
+		}
 	}
 
 	/**
