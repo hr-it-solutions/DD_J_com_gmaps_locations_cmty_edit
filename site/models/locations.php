@@ -49,6 +49,8 @@ class DD_GMaps_Locations_CMTY_EditModelLocations extends JModelItem
 			$model->setState('filter.author_id', $user->id);
 		}
 
+		$model->setState('filter.state', 'all');
+
 		return $model->getItems();
 	}
 }

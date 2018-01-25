@@ -1,6 +1,6 @@
 <?php
 /**
- * @package    DD_
+ * @package    DD_GMaps_Locations_CMTY_Edit
  *
  * @author     HR IT-Solutions Florian Häusler <info@hr-it-solutions.com>
  * @copyright  Copyright (C) 2017 - 2017 Didldu e.K. | HR IT-Solutions
@@ -19,14 +19,6 @@ use Joomla\Utilities\ArrayHelper;
 class DD_GMaps_Locations_CMTY_EditControllerProfile_Edit extends JControllerForm
 {
 	/**
-	 * The URL edit variable.
-	 *
-	 * @var    string
-	 * @since  3.2
-	 */
-	protected $urlVar = 'a.id';
-
-	/**
 	 * Method to add a new record.
 	 *
 	 * @return  mixed  True if the record can be added, an error object if not.
@@ -35,11 +27,69 @@ class DD_GMaps_Locations_CMTY_EditControllerProfile_Edit extends JControllerForm
 	 */
 	public function add()
 	{
-		if (!parent::add())
+
+		$this->option = 'com_dd_gmaps_locations';
+		$this->context = 'profile_edit';
+
+		$context = "$this->option.edit.$this->context";
+
+		// Access check.
+		if (!$this->allowAdd())
+		{
+			// Set the internal error and also the redirect error.
+			$this->setError(JText::_('JLIB_APPLICATION_ERROR_CREATE_RECORD_NOT_PERMITTED'));
+			$this->setMessage($this->getError(), 'error');
+
+			$this->setRedirect(
+				JRoute::_(
+					'index.php?option=' . $this->option . '&view=' . $this->view_list
+					. $this->getRedirectToListAppend(), false
+				)
+			);
+
+			$return = false;
+		}
+
+		// Clear the record edit information from the session.
+		JFactory::getApplication()->setUserState($context . '.data', null);
+
+		// Redirect to the edit screen.
+		$this->setRedirect(
+			JRoute::_(
+				'index.php?option=com_dd_gmaps_locations_cmty_edit&view=profile_edit&layout=edit&id=0', false
+			)
+		);
+
+		$return = true;
+
+		if (!$return)
 		{
 			// Redirect to the return page.
-			$this->setRedirect(JUri::current(), 'Profile Saved', 'note');
+			$this->setRedirect($this->getReturnPage());
 		}
+	}
+
+	/**
+	 * Method to edit an existing record.
+	 *
+	 * @param   string  $key     The name of the primary key of the URL variable.
+	 * @param   string  $urlVar  The name of the URL variable if different from the primary key
+	 * (sometimes required to avoid router collisions).
+	 *
+	 * @return  boolean  True if access level check and checkout passes, false otherwise.
+	 *
+	 * @since   1.6
+	 */
+	public function edit($key = null, $urlVar = 'id')
+	{
+		$result = parent::edit($key, $urlVar);
+
+		if (!$result)
+		{
+			$this->setRedirect(JRoute::_($this->getReturnPage()));
+		}
+
+		return $result;
 	}
 
 	/**
@@ -53,22 +103,27 @@ class DD_GMaps_Locations_CMTY_EditControllerProfile_Edit extends JControllerForm
 	 */
 	protected function allowAdd($data = array())
 	{
-		$categoryId = ArrayHelper::getValue($data, 'catid', $this->input->getInt('filter_category_id'), 'int');
-		$allow = null;
+		$user       = JFactory::getUser();
+		$categoryId = ArrayHelper::getValue($data, 'catid', $this->input->getInt('catid'), 'int');
+		$allow      = null;
 
 		if ($categoryId)
 		{
 			// If the category has been passed in the data or URL check it.
-			$allow = JFactory::getUser()->authorise('core.create', 'com_dd_gmaps_locations.category.' . $categoryId);
+			$allow = $user->authorise('core.create', 'com_dd_gmaps_locations.category.' . $categoryId);
 		}
 
 		if ($allow === null)
 		{
-			// In the absense of better information, revert to the component permissions.
-			return parent::allowAdd();
-		}
+			$this->option = 'com_dd_gmaps_locations';
 
-		return $allow;
+			// In the absense of better information, revert to the component permissions.
+			return $user->authorise('core.create', $this->option) || count($user->getAuthorisedCategories($this->option, 'core.create'));
+		}
+		else
+		{
+			return $allow;
+		}
 	}
 
 	/**
@@ -168,7 +223,7 @@ class DD_GMaps_Locations_CMTY_EditControllerProfile_Edit extends JControllerForm
 	 *
 	 * @since   1.6
 	 */
-	public function save($key = null, $urlVar = 'a_id')
+	public function save($key = null, $urlVar = null)
 	{
 		$result    = parent::save($key, $urlVar);
 		$app       = JFactory::getApplication();

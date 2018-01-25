@@ -172,7 +172,7 @@ class DD_GMaps_Locations_CMTY_EditModelProfile_Edit extends JModelAdmin
 	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.
-		$form = $this->loadForm('com_dd_gmaps_locations_cmty_edit.profile_edit', 'profile_edit', array('control' => 'jform', 'load_data' => $loadData));
+		$form = $this->loadForm('com_dd_gmaps_locations.location', 'profile_edit', array('control' => 'jform', 'load_data' => $loadData));
 
 		// Load original component language files
 		JFactory::getLanguage()->load('com_dd_gmaps_locations', JPATH_ADMINISTRATOR, 'en-GB', true);
@@ -277,7 +277,11 @@ class DD_GMaps_Locations_CMTY_EditModelProfile_Edit extends JModelAdmin
 				if (!JFactory::getUser()->authorise('core.admin'))
 				{
 					$categories = JFactory::getUser()->getAuthorisedCategories('com_dd_gmaps_locations', 'core.edit');
-					$data->set('catid', $categories[0]);
+
+					if (isset($categories[0]))
+					{
+						$data->set('catid', $categories[0]);
+					}
 				}
 			}
 		}
@@ -388,12 +392,18 @@ class DD_GMaps_Locations_CMTY_EditModelProfile_Edit extends JModelAdmin
 
 		$data['created_by'] = JFactory::getUser()->id;
 
-		if (parent::save($data))
-		{
-			return true;
-		}
+		$option = $this->option;
+		$name = $this->name;
 
-		return false;
+		$this->option = 'com_dd_gmaps_locations';
+		$this->name = 'location';
+
+		$result =  parent::save($data);
+
+		$this->option = $option;
+		$this->name = $name;
+
+		return $result;
 	}
 
 	/**

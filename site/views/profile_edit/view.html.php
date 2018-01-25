@@ -41,23 +41,6 @@ class DD_GMaps_Locations_CMTY_EditViewProfile_Edit extends JViewLegacy
 		$this->item        = $this->get('Item');
 		$this->form        = $this->get('Form');
 
-		/* todo: implement check via controller, insted of the checks below this comment!
-		$this->input = $app->input;
-		$view        = $this->input->get('view', 'profile_edit');
-		$layout      = $this->input->get('layout', 'default');
-		$id          = $this->input->getInt('id');
-
-		// Check for edit form
-
-		if ($view == 'profile_edit' && $layout == 'default' && !$this->checkEditId('com_dd_gmaps_locations.edit.location', $id))
-		{
-			$app->enqueueMessage(JText::_('JERROR_ALERTNOAUTHOR'), 'error');
-			$app->setHeader('status', 403, true);
-
-			return false;
-		}
-		*/
-
 		if (empty($this->item->id))
 		{
 			$authorised = $user->authorise('core.create', 'com_dd_gmaps_locations')

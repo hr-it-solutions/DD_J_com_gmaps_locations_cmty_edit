@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-    <layout title="Profile" option="com_dd_gmaps_locations_cmty_edit_profile_edit_view_default_options">
+    <layout title="Profile" option="com_dd_gmaps_locations_cmty_edit_profile_edit_view_edit_options">
         <message>
             <![CDATA[com_dd_gmaps_locations_cmty_edit_profile_edit_desc]]>
         </message>

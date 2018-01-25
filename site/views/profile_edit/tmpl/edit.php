@@ -282,7 +282,7 @@ JHtml::_('script', 'com_dd_gmaps_locations/admin.dd_gmaps_locations.min.js', arr
 
 				<?php // Other fields support, like custom fields (excluded from load 'general', 'address', 'images', 'location-details', 'location-thirparyconnect', 'publishing') ?>
 				<?php $this->ignore_fieldsets = array('general', 'address', 'images', 'location-details', 'location-thirparyconnect', 'publishing'); ?>
-				<?php echo JLayoutHelper::render('profile_edit.params', $this, $basePath = JPATH_COMPONENT . '/layouts/'); ?>
+				<?php echo JLayoutHelper::render('joomla.edit.params', $this); ?>
 
 				<?php if(JComponentHelper::getParams('com_dd_gmaps_locations')->get('ext_c_connect')): ?>
 					<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'location-thirparyconnect', JText::_('COM_DD_GMAPS_LOCATIONS_LOCATION_THIRDPARTYCONNECT')); ?>

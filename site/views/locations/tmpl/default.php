@@ -20,9 +20,9 @@ $user = JFactory::getUser();
     <div class="row-fluid">
         <div class="btn-toolbar">
             <div class="btn-group">
-                <button type="button" class="btn btn-primary" onclick="window.location.href='<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations_cmty_edit&view=profile_edit&id=0'); ?>'">
+                <a class="btn" href="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations_cmty_edit&task=profile_edit.add'); ?>">
                     <span class="icon-plus"></span><?php echo JText::_('JNEW'); ?>
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -36,11 +36,7 @@ $user = JFactory::getUser();
         <div class="span6">
 	        <?php $canEdit    = $user->authorise('core.edit',       'com_dd_gmaps_locations.location.' . $item->id);  ?>
 	        <?php $canEditOwn = $user->authorise('core.edit.own',   'com_dd_gmaps_locations.location.' . $item->id) && (int) $item->created_by === $user->id;  ?>
-	        <?php if (true) : // todo: implement check via controller!  ?>
-                <a href="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations_cmty_edit&view=profile_edit&id=' . (int) $item->id);?> ">
-			        <?php echo $this->escape($item->title);?>
-                </a>
-	        <?php elseif ($canEdit || $canEditOwn) : ?>
+	        <?php if ($canEdit || $canEditOwn) : ?>
                 <a href="<?php echo JRoute::_('index.php?option=com_dd_gmaps_locations_cmty_edit&task=profile_edit.edit&id=' . (int) $item->id);?> ">
 			        <?php echo $this->escape($item->title);?>
                 </a>
