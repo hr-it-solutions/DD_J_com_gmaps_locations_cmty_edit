@@ -7,7 +7,7 @@ A Joomla! component to provide profile frontend edit for DD GMaps Locations. Add
 
 ### Dependent Extensions
 - com_dd_gmaps_locations [DD GMaps Locations](https://github.com/hr-it-solutions/DD_J_com_gmaps_locations)<br>
-
+<br>
 **Note:** These is just the **Community-Editon Repository**.<br>
 For more infos, description, PRO-Version, licensing and ordering, please visit the product hompage.
 
