@@ -6,12 +6,10 @@ A Joomla! component to provide profile frontend edit for DD GMaps Locations. Add
 [![GPL Licence](https://badges.frapsoft.com/os/gpl/gpl.png?v=102)](https://opensource.org/licenses/GPL-2.0/)
 
 ### Dependent Extensions
-- com_dd_gmaps_locations [DD GMaps Locations](https://github.com/hr-it-solutions/DD_J_com_gmaps_locations)
+- com_dd_gmaps_locations [DD GMaps Locations](https://github.com/hr-it-solutions/DD_J_com_gmaps_locations)<br>
 
 **Note:** These is just the **Community-Editon Repository**.<br>
 For more infos, description, PRO-Version, licensing and ordering, please visit the product hompage.
-
-<br>
 
 ### Get  [**🔗 More Infos...**](https://www.hr-it-solutions.com/extension-shop/joomla-extensions/4/gmaps-locations?number=HRIT10004)
 [**https://www.hr-it-solutions.com/extension-shop/joomla-extensions/4/gmaps-locations?number=HRIT10004**](https://www.hr-it-solutions.com/extension-shop/joomla-extensions/4/gmaps-locations?number=HRIT10004)
