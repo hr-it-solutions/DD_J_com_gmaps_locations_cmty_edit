@@ -11,6 +11,8 @@ A Joomla! component to provide profile frontend edit for DD GMaps Locations. Add
 **Note:** These is just the **Community-Editon Repository**.<br>
 For more infos, description, PRO-Version, licensing and ordering, please visit the product hompage.
 
+<br>
+
 ### Get  [**🔗 More Infos...**](https://www.hr-it-solutions.com/extension-shop/joomla-extensions/4/gmaps-locations?number=HRIT10004)
 [**https://www.hr-it-solutions.com/extension-shop/joomla-extensions/4/gmaps-locations?number=HRIT10004**](https://www.hr-it-solutions.com/extension-shop/joomla-extensions/4/gmaps-locations?number=HRIT10004)
 
